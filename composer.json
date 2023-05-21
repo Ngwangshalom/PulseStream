@@ -1,0 +1,22 @@
+{
+    "name": "vendor/pulsestream",
+    "description": "Real-Time Message Update PulseStream please no usage of framework",
+    "type": "project",
+    "require": {
+        "symfony/routing": "6.3.x-dev",
+        "symfony/http-foundation": "6.3.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Vendor\\Pulsestream\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "NgwangShalom",
+            "email": "ngwangshalom956@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
