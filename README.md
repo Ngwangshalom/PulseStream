@@ -32,9 +32,12 @@ We encourage developers to join our research program, provide feedback, contribu
 
 # Getting Started
 To get started with the Real-Time Messaging Framework, please refer to the documentation for detailed instructions on installation, usage, and integration into your projects. You can also find examples and code snippets to help you quickly incorporate real-time messaging capabilities into your applications.
-To start coding with use please cline repo.
-Run ```composer install``` to install all composer files.
-Run ```yarn add``` to install all node packages.
+To start coding with use please cline repo.  
+
+Run ```composer install``` to install all composer files.  
+
+Run ```yarn add``` to install all node packages.  
+
 When done you can now run ```php -S localhost:8000``` to start your php server then start testing apis.
 
 # Contributing
