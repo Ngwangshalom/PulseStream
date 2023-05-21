@@ -1,4 +1,4 @@
-# Real-Time Message Update PulseStream
+# Real-Time Message Update PulseStream ```please no usage of framework```
 ![Framework Logo](logos/pulsestream-high-resolution-logo-color-on-transparent-background.png)
 
 The Real-Time Messaging Framework by name PulseStream is a lightweight and efficient solution that allows developers to receive real-time messages from a database without overloading the server with unnecessary requests. This framework is designed to provide a seamless experience for developers who need real-time updates from their databases while minimizing the server load.infact it does not request anything from the server unless there is a change of state from that particular table
