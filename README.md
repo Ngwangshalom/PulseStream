@@ -35,6 +35,11 @@ To get started with the Real-Time Messaging Framework, please refer to the docum
 
 # Contributing
 We welcome contributions from the community to enhance and improve the Real-Time Messaging Framework. If you encounter any issues, have ideas for new features, or want to contribute code, please follow our contribution guidelines.
+to start coding with use please cline repo
+run ```composer install``` to install all composer files
+run ```yarn add``` to install all node packages
+when done you can now run ```php -S localhost:8000``` to start your php server then start testing apis
+
 
 # Support
 If you need any assistance, have questions, or want to report a bug, please reach out to our support team at ngwangshalom956@gmail.com. We're here to help!
