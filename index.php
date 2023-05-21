@@ -3,6 +3,11 @@ require __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/app/API/Controllers/HomeController.php';
 require_once __DIR__ . '/app/API/Controllers/AuthController.php';
 
+//test controller requires
+require_once __DIR__ . '/tests/API/Controllers/AuthControllerTest.php';
+
+
+
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RequestContext;
@@ -11,7 +16,18 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
 $routes = new RouteCollection();
+//please add your test routing here before sending to the main route in app please
+//test routine
+//example
+$routes->add('Test Auth', new Route('/TestAuth', [
+    '_controller' => 'tests\\API\\Controllers\\AuthControllerTest::login',
+]));
 
+
+
+
+
+//test ends here thanks 
 // general routes for all platforms such as web,android and desktop apps
 $routes->add('home', new Route('/', [
     '_controller' => 'App\\API\\Controllers\\HomeController::index',

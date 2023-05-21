@@ -1,0 +1,13 @@
+{
+  "name": "PulseStream",
+  "version": "1.0",
+  "description": "Simple and light weight framework for serverside request without server load",
+  "main": "index.js",
+  "repository": "https://github.com/Ngwangshalom/PulseStream.git",
+  "author": "NgwangShalom <ngwangshalom956@gmail.com>",
+  "license": "MIT",
+  "private": null,
+  "dependencies": {
+    "web-push": "^3.6.1"
+  }
+}
