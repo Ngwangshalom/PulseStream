@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 $routes = new RouteCollection();
 
+// general routes for all platforms such as web,android and desktop apps
 $routes->add('home', new Route('/', [
     '_controller' => 'App\\API\\Controllers\\HomeController::index',
 ]));
@@ -27,7 +28,56 @@ $routes->add('register', new Route('/api/register', [
 $routes->add('logout', new Route('/api/logout', [
     '_controller' => 'App\\API\\Controllers\\AuthController::logout',
 ]));
+$routes->add('comment', new Route('/api/comment', [
+    '_controller' => 'App\\API\\Controllers\\CommentController::create',
+], [], [], '', [], ['POST']));
 
+$routes->add('share', new Route('/api/share', [
+    '_controller' => 'App\\API\\Controllers\\ShareController::create',
+], [], [], '', [], ['POST']));
+
+$routes->add('message', new Route('/api/message', [
+    '_controller' => 'App\\API\\Controllers\\MessageController::create',
+], [], [], '', [], ['POST']));
+
+$routes->add('subscription', new Route('/api/subscription', [
+    '_controller' => 'App\\API\\Controllers\\SubscriptionController::subscribe',
+], [], [], '', [], ['POST']));
+
+$routes->add('get_messages', new Route('/api/messages', [
+    '_controller' => 'App\\API\\Controllers\\MessageController::index',
+], [], [], '', [], ['GET']));
+
+$routes->add('get_subscriptions', new Route('/api/subscriptions', [
+    '_controller' => 'App\\API\\Controllers\\SubscriptionController::index',
+], [], [], '', [], ['GET']));
+
+
+//web specific routes starts here
+
+
+
+
+//web specific routes ends
+
+
+//mobile specific routes starts
+
+
+
+
+//mobile specific routes ends
+
+
+
+
+//desktop specific routes strnatcasecmp
+
+
+
+
+
+//desktop specific routes ends
 $context = new RequestContext('./');
 $context->fromRequest(Request::createFromGlobals());
 

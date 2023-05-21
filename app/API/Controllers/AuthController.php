@@ -1,20 +1,22 @@
 <?php
-namespace App\API\Controllers;
+
+namespace app\API\Controllers;
+
 class AuthController
 {
-    public function login()
+    public  static function login()
     {
         // Handle logout logic
         return 'Hello, welcome to login api';
     }
 
-    public function register()
+    public  static function register()
     {
         // Handle logout logic
         return 'Hello, welcome to register api';
     }
 
-    public function logout()
+    public  static function logout()
     {
         // Handle logout logic
         return 'Hello, welcome to login api';
