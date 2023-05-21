@@ -13,22 +13,22 @@ use Symfony\Component\HttpFoundation\Request;
 $routes = new RouteCollection();
 
 $routes->add('home', new Route('/', [
-    '_controller' => 'app\\API\\Controllers\\HomeController::index',
+    '_controller' => 'App\\API\\Controllers\\HomeController::index',
 ]));
 
 $routes->add('login', new Route('/api/login', [
-    '_controller' => 'app\\API\\Controllers\\AuthController::login',
+    '_controller' => 'App\\API\\Controllers\\AuthController::login',
 ], [], [], '', [], ['POST']));
 
 $routes->add('register', new Route('/api/register', [
-    '_controller' => 'app\\API\\Controllers\\AuthController::register',
+    '_controller' => 'App\\API\\Controllers\\AuthController::register',
 ], [], [], '', [], ['POST']));
 
 $routes->add('logout', new Route('/api/logout', [
-    '_controller' => 'app\\API\\Controllers\\AuthController::logout',
+    '_controller' => 'App\\API\\Controllers\\AuthController::logout',
 ]));
 
-$context = new RequestContext();
+$context = new RequestContext('./');
 $context->fromRequest(Request::createFromGlobals());
 
 $matcher = new UrlMatcher($routes, $context);
