@@ -5,11 +5,13 @@ namespace app\API\Controllers;
 use app\Web\MiddleWare\UserRepository;
 use app\Web\MiddleWare\ValidateRequest;
 use app\Web\MiddleWare\EncryptData;
-use Config\Database;
+// use Config\Database;
+use app\Web\MiddleWare\handleSuccess;
 use Symfony\Component\HttpFoundation\Request;
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 // require_once __DIR__ . '/../../../app/Web/MiddleWare/UserRepository.php';
+// require_once '../../Config/Database.php';
 
 
 class AuthController
@@ -62,100 +64,61 @@ class AuthController
         exit();
     }
 }
-
 public static function register()
 {
-    // Retrieve form data
-    $id = $_POST['id'] ?? '';
-    $firstName = $_POST['first_name'] ?? '';
-    $lastName = $_POST['last_name'] ?? '';
-    $username = $_POST['username'] ?? '';
-    $phoneNumber = $_POST['phone_number'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $country = $_POST['country'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $role = $_POST['role'] ?? '';
-    $session = $_POST['session'] ?? '';
+    // Retrieve the JSON data from the request body
+    $requestData = json_decode(file_get_contents('php://input'), true);
 
-    // Perform validations
-    $validationErrors = [];
+    // Retrieve the username, password, and country from the submitted JSON data
+    $username = $requestData['username'] ?? '';
+    $password = $requestData['password'] ?? '';
+    $country = $requestData['country'] ?? '';
 
-    // Check if the fields are required and not empty
-    if (empty($id)) {
-        $validationErrors['id'] = "The field 'id' is required.";
-    }
-    if (empty($firstName)) {
-        $validationErrors['first_name'] = "The field 'first_name' is required.";
-    }
-    if (empty($lastName)) {
-        $validationErrors['last_name'] = "The field 'last_name' is required.";
-    }
-    if (empty($username)) {
-        $validationErrors['username'] = "The field 'username' is required.";
-    }
-    if (empty($phoneNumber)) {
-        $validationErrors['phone_number'] = "The field 'phone_number' is required.";
-    }
-    if (empty($email)) {
-        $validationErrors['email'] = "The field 'email' is required.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $validationErrors['email'] = "Invalid email format for field 'email'.";
-    }
-    if (empty($country)) {
-        $validationErrors['country'] = "The field 'country' is required.";
-    }
-    if (empty($password)) {
-        $validationErrors['password'] = "The field 'password' is required.";
-    }
-    if (empty($role)) {
-        $validationErrors['role'] = "The field 'role' is required.";
-    }
-    if (empty($session)) {
-        $validationErrors['session'] = "The field 'session' is required.";
-    }
+    // Perform validations and database operations
+    // ...
 
-    // If there are validation errors, redirect back to the registration page with error messages
-    if (!empty($validationErrors)) {
-        $_SESSION['validation_errors'] = $validationErrors;
-        header('Location: /api/register');
-        exit();
-    }
-
-    // Hash the password
+    // Example: Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Example: Store the registration data in the database
-    $db = Database::getInstance();
-    $connection = $db->getConnection();
+    // Example: Create a database connection
+    $servername = 'localhost';
+    $username = 'root';
+    $password = '';
+    $database = 'pulsestream';
 
-    $query = "INSERT INTO users (id, first_name, last_name, username, phone_number, email, country, password, role, session) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $connection = new \mysqli($servername, $username, $password, $database);
+
+    // Check the connection
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+
+    // Example: Store the registration data in the database
+    $query = "INSERT INTO pulse_users (username, password, country) VALUES (?, ?, ?)";
     $statement = $connection->prepare($query);
-    $statement->bind_param(
-        'ssssssssss',
-        $id,
-        $firstName,
-        $lastName,
-        $username,
-        $phoneNumber,
-        $email,
-        $country,
-        $hashedPassword,
-        $role,
-        $session
-    );
+    $statement->bind_param('sss', $username, $hashedPassword, $country);
 
     if ($statement->execute()) {
-        // Registration successful, redirect to login page
-        header('Location: /Success');
+        // Registration successful
+        $response = [
+            'status' => 'success',
+            'message' => 'Registration successful.'
+        ];
+        header('Content-Type: application/json');
+        echo json_encode($response);
         exit();
     } else {
-        // Registration failed, redirect back to the registration page with a response
-        $response = "Registration failed. Please try again.";
-        header('Location: /Failed');
+        // Registration failed
+        $response = [
+            'status' => 'error',
+            'message' => 'Registration failed. Please try again.'
+        ];
+        header('Content-Type: application/json');
+        echo json_encode($response);
         exit();
     }
 }
+
 
     
         public static function logout()

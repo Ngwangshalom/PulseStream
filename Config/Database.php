@@ -2,7 +2,7 @@
 
 namespace Config\Database;
 
-class DatabaseConnection
+class Database
 {
     private static $instance;
     private $connection;

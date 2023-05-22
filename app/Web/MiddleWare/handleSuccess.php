@@ -1,4 +1,5 @@
 <?php
+namespace app\Web\Middleware;
 
 
 class SuccessHandler

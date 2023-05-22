@@ -13,7 +13,8 @@
             "Vendor\\Pulsestream\\": "src/",
             "app\\": "app/",
             "app\\API\\Controllers\\": "app/API/Controllers/",
-            "app\\Web\\MiddleWare\\": "app/Web/MiddleWare/"
+            "app\\Web\\MiddleWare\\": "app/Web/MiddleWare/",
+            "Config\\": "Config/"
         }
     },
     "authors": [
