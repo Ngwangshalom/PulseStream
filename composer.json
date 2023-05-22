@@ -6,10 +6,14 @@
         "symfony/routing": "6.3.x-dev",
         "symfony/http-foundation": "6.3.x-dev"
     },
+
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Vendor\\Pulsestream\\": "src/"
+            "Vendor\\Pulsestream\\": "src/",
+            "app\\": "app/",
+            "app\\API\\Controllers\\": "app/API/Controllers/",
+            "app\\Web\\MiddleWare\\": "app/Web/MiddleWare/"
         }
     },
     "authors": [

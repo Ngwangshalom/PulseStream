@@ -8,6 +8,11 @@ require_once __DIR__ . '/tests/API/Controllers/AuthControllerTest.php';
 
 
 
+//Pages for testing failed success or warning
+require_once __DIR__ . '/Endpoints/Endpoint.php';
+
+
+
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RequestContext;
@@ -24,10 +29,22 @@ $routes->add('Test Auth', new Route('/TestAuth', [
 ]));
 
 
+//all this is just for testing
+$routes->add('Failed', new Route('/Failed', [
+    '_controller' => 'Endpoints\\Endpoint\\EndpointPages::Failed',
+]));
 
+$routes->add('Success', new Route('/success', [
+    '_controller' => 'Endpoints\\Endpoint\\EndpointPages::Success',
+]));
+$routes->add('Warning', new Route('/warning', [
+    '_controller' => 'Endpoints\\Endpoint\\EndpointPages::Warning',
+]));
 
-
+//testing
 //test ends here thanks 
+
+
 // general routes for all platforms such as web,android and desktop apps
 $routes->add('home', new Route('/', [
     '_controller' => 'App\\API\\Controllers\\HomeController::index',
@@ -108,5 +125,5 @@ try {
     $response = call_user_func([$class, $method]);
     echo $response;
 } catch (ResourceNotFoundException $e) {
-    echo '404 - Not Found';
+    echo '<div align="center"><h1 style="color:red; font-size:24;">404- please check the url and try again-{PulseStream-API [Endpoint=>ERROR]}</h1></div>';
 }
