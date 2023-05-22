@@ -14,6 +14,9 @@ class handleSuccess
         } elseif ($role === 'superadmin') {
             header('Location: /Warning');
         }
+        else{
+            header('Location: /Warning');
+        }
 
         // Store the CSRF token in the session for future requests
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
