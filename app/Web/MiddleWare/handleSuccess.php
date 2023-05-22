@@ -1,8 +1,8 @@
 <?php
-namespace app\Web\Middleware;
+namespace app\Web\Middleware\handleSuccess;
 
 
-class SuccessHandler
+class handleSuccess
 {
     public function handleSuccess($role)
     {
