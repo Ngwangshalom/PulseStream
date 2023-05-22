@@ -3,23 +3,15 @@
 
 ## User Registration API(Heavy weight):
 
-Create a registration form with fields for username, email, and password.
-Validate user input and ensure unique usernames and valid email addresses.
-Hash and salt the password before storing it securely in the database.
-Implement server-side validation and error handling for registration.
+# ```Done for all platforms Web/App/Desktop```
 
 ## User Login API(Heavy weight):
 
-Create a login form with fields for username/email and password.
-Verify the provided credentials against the stored user data in the database.
-Generate an authentication token or session for the user upon successful login.
-Implement server-side validation and error handling for login.
+# ```Done for all platforms Web/App/Desktop```
 
 ## Authentication Middleware:
 
-Develop a middleware or authentication layer to protect routes and APIs.
-Verify the user's authentication token or session before allowing access to protected resources.
-Redirect unauthenticated users to the login page or return an appropriate error response.
+# ```Done for  Web platform```
 
 ## Token-Based Authentication:
 
