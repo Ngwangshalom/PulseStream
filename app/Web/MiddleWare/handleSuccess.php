@@ -1,5 +1,5 @@
 <?php
-namespace app\Web\Middleware\handleSuccess;
+namespace app\Web\Middleware;
 
 
 class handleSuccess

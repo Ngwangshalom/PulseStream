@@ -53,7 +53,7 @@ class AuthController
         $user['csrf_token'] = $csrfToken;
 
         // Redirect to the success handler with the user's role
-        $successHandler = new SuccessHandler();
+        $successHandler = new handleSuccess();
         $successHandler->handleSuccess($user['role']);
 
         exit();
@@ -129,7 +129,8 @@ public static function register()
             // $session->clear();
     
             // Redirect to the login page or a home page
-            header('Location: /login');
+            echo "logged out";
+            // header('Location: /api/login');<
             exit();
         }
     }
