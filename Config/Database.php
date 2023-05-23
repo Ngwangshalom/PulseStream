@@ -1,5 +1,15 @@
 <?php
-
+// company: PulseStream
+// Developed by: Ngwang Shalom
+// Location: Cameroon/Bamenda
+// Languages: php/hack/javascript/node(library)
+// position: Senior dev
+//
+//
+// Please add your own description if you are a contributor
+//
+//
+//
 namespace Config;
 
 class Database
@@ -10,7 +20,6 @@ class Database
     public function __construct()
     {
         $config = require_once __DIR__ . '/PulseFig/config.php';
-
 
         
         // Retrieve the database credentials from the configuration file
