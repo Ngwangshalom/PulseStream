@@ -1,4 +1,3 @@
-
 <?php
 // company: PulseStream
 // Developed by: Ngwang Shalom
@@ -10,26 +9,77 @@
 // Please add your own description if you are a contributor
 //
 //
-//
+
+require 'vendor/autoload.php';
+
+use PayPal\Api\Amount;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\Transaction;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
+
 class SubscriptionManager {
     private $db;
+    private $apiContext;
 
     public function __construct() {
         // Initialize the database connection
-        $this->db = new PDO("mysql:host=your_database_host;dbname=your_database_name", "your_username", "your_password");
+        $this->db = new PDO("mysql:host=localhost;dbname=your_database_name", "your_username", "your_password");
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Initialize the PayPal API context
+        $this->apiContext = new ApiContext(
+            new OAuthTokenCredential(
+                'YOUR_CLIENT_ID',
+                'YOUR_CLIENT_SECRET'
+            )
+        );
     }
 
     public function createPayment($userId, $amount) {
-        // Create a new payment record in the database
-        $query = "INSERT INTO payments (user_id, amount, created_at) VALUES (:user_id, :amount, NOW())";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':user_id', $userId);
-        $stmt->bindParam(':amount', $amount);
-        $stmt->execute();
+        // Create a new PayPal payment
+        $payment = new Payment();
+        $payment->setIntent('sale');
 
-        // Return the payment ID
-        return $this->db->lastInsertId();
+        // Set the payer details
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');
+        $payment->setPayer($payer);
+
+        // Set the transaction details
+        $transaction = new Transaction();
+        $amountObject = new Amount();
+        $amountObject->setCurrency('USD');
+        $amountObject->setTotal($amount);
+        $transaction->setAmount($amountObject);
+        $payment->setTransactions([$transaction]);
+
+        // Set the redirect URLs
+        $redirectUrls = new RedirectUrls();
+        $redirectUrls->setReturnUrl('http://localhost/success');
+        $redirectUrls->setCancelUrl('http://localhost/cancel');
+        $payment->setRedirectUrls($redirectUrls);
+
+        // Create the payment using the PayPal API
+        try {
+            $payment->create($this->apiContext);
+
+            // Store the payment information in the database
+            $query = "INSERT INTO payments (user_id, amount, payment_id, created_at) VALUES (:user_id, :amount, :payment_id, NOW())";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->bindParam(':amount', $amount);
+            $stmt->bindParam(':payment_id', $payment->getId());
+            $stmt->execute();
+
+            // Return the PayPal approval URL
+            return $payment->getApprovalLink();
+        } catch (Exception $e) {
+            // Handle any errors that occurred during payment creation
+            return null;
+        }
     }
 
     public function trackPaymentsPerMonth() {
@@ -61,7 +111,14 @@ class SubscriptionManager {
 $subscriptionManager = new SubscriptionManager();
 
 // Create a payment for a user
-$paymentId = $subscriptionManager->createPayment(123, 50.00);
+$approvalUrl = $subscriptionManager->createPayment(123, 50.00);
+
+// Redirect the user to the PayPal approval URL
+if ($approvalUrl) {
+    header("Location: $approvalUrl");
+} else {
+    echo "Error creating PayPal payment.";
+}
 
 // Track payments per month
 $paymentPerMonth = $subscriptionManager->trackPaymentsPerMonth();
