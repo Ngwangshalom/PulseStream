@@ -7,7 +7,7 @@
 //
 //
 // Please add your own description if you are a contributor
-//
+// as far as you are a contributor
 //
 //
 namespace Config;
