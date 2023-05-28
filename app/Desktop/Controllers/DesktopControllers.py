@@ -15,6 +15,7 @@ def get_db_connection():
     return connection
 
 # Retrieve user information from the database
+#very essentials
 @app.route('/users', methods=['GET'])
 def get_users():
     connection = get_db_connection()
