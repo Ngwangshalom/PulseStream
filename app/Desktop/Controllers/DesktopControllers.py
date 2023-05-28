@@ -28,7 +28,7 @@ def get_users():
     # Format the data as a list of dictionaries
     user_data = [{'name': user[0], 'age': user[1]} for user in users]
     return jsonify(user_data)
-
+#very essentials
 # Retrieve general information from the database
 @app.route('/general-info', methods=['GET'])
 def get_general_info():
