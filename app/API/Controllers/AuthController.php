@@ -24,7 +24,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 // require_once __DIR__ . '/../../../app/Web/MiddleWare/UserRepository.php';
 use Config\Database;
 
-
+use app\API\HomeController;
 class AuthController
 {
     public static function login()
@@ -62,11 +62,13 @@ class AuthController
 
             // Verify the password
             if (password_verify($password, $hashedPassword)) {
-                // Login successful
+                $HomeController = new HomeController();
+                // Login successful.
                 $response = [
                     'status' => 'success',
                     'message' => 'Login successful.'
                 ];
+                return $HomeController;
             } else {
                 // Invalid password
                 $response = [

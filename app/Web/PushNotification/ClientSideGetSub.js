@@ -9,7 +9,7 @@
 //
 //
 //
-
+//
 // Request permission for push notifications
 Notification.requestPermission().then(permission => {
     if (permission === 'granted') {
