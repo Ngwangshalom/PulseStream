@@ -41,7 +41,7 @@ class HomeController
         // Clear the console
         echo "\033[2J";
         
-        // Loop through the frames
+        // Loop through the framesf
         for ($i = 0; $i < $totalFrames; $i++) {
             // Get the current frame
             $frame = $frames[$i % count($frames)];
