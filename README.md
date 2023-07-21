@@ -49,4 +49,4 @@ If you need any assistance, have questions, or want to report a bug, please reac
 
 # License
 The PulseStream is released under the MIT License. Feel free to use, modify, and distribute the framework as per the terms of the license.
-# powered by ```"PulseStream"```
+# powered by ```"Wg Organisation"```
