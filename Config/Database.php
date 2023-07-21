@@ -21,7 +21,7 @@ class Database
     {
         $config = require_once __DIR__ . '/PulseFig/config.php';
 
-        
+        //get most
         // Retrieve the database credentials from the configuration file
         $host = $config['host'];
         $username = $config['username'];
