@@ -4,7 +4,7 @@
     <title>User Page</title>
 </head>
 <body>
-    <h1>User Page</h1>
+    <h1>User Pages</h1>
     <p>Welcome, User!</p>
 </body>
 </html>
